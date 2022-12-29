@@ -17,7 +17,7 @@
 	<div class="container">
 		<p><%=request.getRequestURL()%></p>
 		<p>
-			<a href="books.jsp" class="btn btn-secondary"> 상품 목록 &raquo;</a>
+			<a href="books.jsp" class="btn btn-secondary"> 목록 페이지로 이동 &raquo;</a>
 		</p>
 	</div>
 
