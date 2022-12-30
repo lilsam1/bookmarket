@@ -10,6 +10,16 @@
 " rel="stylesheet" >
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	function addToCart() {
+		if(confirm("상품을 장바구니에 추가하시겠습니까?")) {
+			document.addForm.submit();
+		}
+		else {
+			document.addForm.reset();
+		}
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="menu.jsp" />
@@ -41,8 +51,11 @@
 				<p><b>페이지수</b> : <%=book.getTotalPages() %></p>
 				<p><b>재고</b> : <%=book.getUnitsinStock() %></p>
 				<h4><%=book.getUnitPrice() %>원</h3>
-				<a href="#" class="btn btn-info"> 도서 주문 &raquo;</a>
+				<form name="addForm" action="./addCart.jsp?id=<%=book.getBooktid()%>" method="post">
+				<a href="#" class="btn btn-info" onclick="addToCart()"> 도서 주문 &raquo;</a>
+				<a href="./cart.jsp" class="btn btn-warning" > 장바구니 &raquo;</a>
 				<a href="./books.jsp" class="btn btn-secondary"> 도서 목록 &raquo;</a>
+				</form>
 			</div>
 		</div>
 		<hr>
