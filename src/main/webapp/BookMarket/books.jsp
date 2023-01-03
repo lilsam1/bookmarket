@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="bookmarket.dto.Book" %>
-<%@ page import="bookmarket.dao.BookRepository" %>   
+<%@ page import="java.sql.*" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,29 +16,32 @@
 			<h1 class="display-3">도서목록</h1>
 		</div>
 	</div>
-	<% 
-		BookRepository dao = BookRepository.getInstance();
-		ArrayList<Book> listOfBooks = dao.getAllProducts();
-	%>
-	
 	<div class="container">
 		<div class="col">
+			<%@ include file="dbconn.jsp" %>
 			<%
-				for (int i = 0; i < listOfBooks.size(); i++) {
-					Book book = listOfBooks.get(i);
+				String sql = "select * from book";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
 			%>
 			<div class="col-md-4">
-				<img src = "${pageContext.request.contextPath}/resources/images/<%=book.getFilename()%>"
-				style="width: 100%" alt="">
-				<h3>[<%=book.getCategory()%>] <%=book.getName()%></h3>
-				<p><%=book.getDescription()%></p>
-				<p><%=book.getAuthor()%> | <%=book.getPublisher()%> | <%=book.getUnitPrice()%>원</p>
-				<p><a href="./book.jsp?id=<%=book.getBooktid()%>" class="btn btn-secondary" role="button">
-				상세 정보 &raquo;</a>
-				<hr>
+				<img src="${pageContext.request.contextPath}/resources/images/<%=rs.getString("filename")%>" style="width : 100%">
+				<h3>[<%=rs.getString("category")%>] <%=rs.getString("name")%></h3>
+				<p><%=rs.getString("description")%></p>
+				<p><%=rs.getString("author")%> | <%=rs.getString("publisher")%> | <%=rs.getString("unitPrice")%>원</p>
+				<p>
+				<a href="./book.jsp?id=<%=rs.getString("booktid")%>" 
+				class="btn btn-secondary" role="button"> 상세 정보 &raquo;</a>
 			</div>
 			<%
 				}
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
 			%>
 		</div>
 		<hr>

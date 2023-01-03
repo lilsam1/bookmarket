@@ -6,13 +6,11 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="bookmarket.dto.Book" %>
-<%@ page import="bookmarket.dao.BookRepository" %>
 <%@ include file="dbconn.jsp" %>
 
-<%	
+<%
 	request.setCharacterEncoding("UTF-8");
-	
+
 	String realPath = request.getServletContext().getRealPath("resources/images");	// 파일이 저장될 경로
 	File dir = new File(realPath);	// dir: directory
 	if (!dir.exists()) {	// 지정된 경로에 디렉토리(폴더)가 있는지 확인
@@ -62,28 +60,55 @@
 	String fname = (String) files.nextElement();
 	String fileName = multi.getFilesystemName(fname);
 	
-	String sql = "insert into book value(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	String sql = "select * from book where booktid = ?";
 	pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, booktid);
-	pstmt.setString(2, name);
-	pstmt.setInt(3, price);
-	pstmt.setString(4, author);
-	pstmt.setString(5, description);
-	pstmt.setString(6, publisher);
-	pstmt.setString(7, category);
-	pstmt.setLong(8, stock);
-	pstmt.setInt(9, pages);
-	pstmt.setString(10, releaseDate);
-	pstmt.setString(11, condition);
-	pstmt.setString(12, fileName);
-	pstmt.executeUpdate();
+	rs = pstmt.executeQuery();
 	
+	if (rs.next()) {
+		if (fileName != null) {
+			sql = "UPDATE book SET name=?, unitPrice=?, author=?, description=?, publisher=?, category=?, " 
+				+ "unitsinStock=?, totalPages=?, releaseDate=?, `condition`=?, filename=? WHERE booktid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, price);
+			pstmt.setString(3, author);
+			pstmt.setString(4, description);
+			pstmt.setString(5, publisher);
+			pstmt.setString(6, category);
+			pstmt.setLong(7, stock);
+			pstmt.setInt(8, pages);
+			pstmt.setString(9, releaseDate);
+			pstmt.setString(10, condition);
+			pstmt.setString(11, fileName);
+			pstmt.setString(12, booktid);
+			pstmt.executeUpdate();
+		} else {
+			sql = "UPDATE book SET name=?, unitPrice=?, author=?, description=?, publisher=?, category=?, " 
+					+ "unitsinStock=?, totalPages=?, releaseDate=?, `condition`=? WHERE booktid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, price);
+			pstmt.setString(3, author);
+			pstmt.setString(4, description);
+			pstmt.setString(5, publisher);
+			pstmt.setString(6, category);
+			pstmt.setLong(7, stock);
+			pstmt.setInt(8, pages);
+			pstmt.setString(9, releaseDate);
+			pstmt.setString(10, condition);
+			pstmt.setString(11, booktid);
+			pstmt.executeUpdate();
+		}		
+	}
+
+	if (rs != null)
+		rs.close();
 	if (pstmt != null)
 		pstmt.close();
 	if (conn != null)
 		conn.close();
 	
-	response.sendRedirect("books.jsp");
-	
+	response.sendRedirect("editBook.jsp?edit=update");
 	
 %>

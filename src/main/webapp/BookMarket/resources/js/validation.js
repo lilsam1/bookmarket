@@ -1,11 +1,11 @@
 function CheckAddProduct() {
-    var productId = document.getElementById("productId");
+    var booktid = document.getElementById("booktid");
     var name = document.getElementById("name");
     var unitPrice = document.getElementById("unitPrice");
-    var unitsInStock = document.getElementById("unitsInStock");
+    var unitsinStock = document.getElementById("unitsinStock");
 
     // 상품아이디 체크
-    if (!check(/^P[0-9]{4,11}$/, productId, 
+    if (!check(/^P[0-9]{4,11}$/, booktid, 
             "[상품 코드]\nP와 숫자를 조합하여 5~12자까지 입력하세요\n첫 글자는 반드시 P로 시작하세요"))
         return false;
     
@@ -32,10 +32,10 @@ function CheckAddProduct() {
     }
 
     // 재고 수 체크
-    if (unitsInStock.value.length == 0 || isNaN(unitsInStock.value)) {
+    if (unitsinStock.value.length == 0 || isNaN(unitsinStock.value)) {
         alert("[재고 수]\n숫자만 입력하세요");
-        unitsInStock.select();
-        unitsInStock.focus();
+        unitsinStock.select();
+        unitsinStock.focus();
         return false;
     }
 
@@ -49,5 +49,5 @@ function CheckAddProduct() {
         return false;
     }
 
-    document.newProduct.submit()
+    document.newBook.submit()
 }
