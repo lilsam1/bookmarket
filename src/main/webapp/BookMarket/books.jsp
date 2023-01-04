@@ -31,7 +31,7 @@
 				<p><%=rs.getString("description")%></p>
 				<p><%=rs.getString("author")%> | <%=rs.getString("publisher")%> | <%=rs.getString("unitPrice")%>원</p>
 				<p>
-				<a href="./book.jsp?id=<%=rs.getString("booktid")%>" 
+				<a href="./book.jsp?booktid=<%=rs.getString("booktid")%>" 
 				class="btn btn-secondary" role="button"> 상세 정보 &raquo;</a>
 			</div>
 			<%

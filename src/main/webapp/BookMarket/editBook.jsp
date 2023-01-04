@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>도서 편집</title>
 <script type="text/javascript">
-	function deleteConfirm(id) {
+	function deleteConfirm(booktid) {
 		if (confirm("해당 도서를 삭제합니다") == true)
 			location.href = "./deleteBook.jsp?booktid="  + booktid;
 		else
