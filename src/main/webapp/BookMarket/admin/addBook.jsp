@@ -5,12 +5,12 @@
 <head>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css
 " rel="stylesheet" >
-<script src="./resources/js/validation.js"></script>
+<script src="../resources/js/validation.js"></script>
 <meta charset="UTF-8">
 <title>도서 등록</title>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../inc/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">도서 등록</h1>

@@ -8,12 +8,12 @@
 <%
 	String cartId = session.getId();
 %>
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css" >
 <meta charset="UTF-8">
 <title>장바구니</title>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../inc/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">장바구니</h1>
@@ -91,6 +91,6 @@
 		</script>
 		<hr>
 	</div>
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="../inc/footer.jsp" />
 </body>
 </html>

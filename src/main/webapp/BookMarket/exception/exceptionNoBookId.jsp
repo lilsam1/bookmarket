@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css" >
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css" >
 <meta charset="UTF-8">
 <title>상품 아이디 오류</title>
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
+	<jsp:include page="../inc/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h2 class="alert alert-danger">해당 도서가 존재하지 않습니다</h2>
